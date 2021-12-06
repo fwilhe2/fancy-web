@@ -7,7 +7,7 @@
             webpage</a>
     </p>
 
-    <div style="background: black;">
+    <div style="background: black">
         <canvas id="follow_mouse_canvas" width="1200" height="600"></canvas>
 
     </div>
@@ -15,19 +15,30 @@
 
     <script>
 
+        const colors = {
+            'mouseDown': 'rgb(82, 236, 35)',
+            'mouseUp': 'rgb(87, 132, 255)'
+        }
+
+        let mouseDown = false;
+
         const followMouseCanvas = document.getElementById('follow_mouse_canvas');
         const context = followMouseCanvas.getContext('2d');
 
-        followMouseCanvas.width  = window.innerWidth;
+        followMouseCanvas.width = window.innerWidth;
+
+        followMouseCanvas.addEventListener('mouseup', e => {
+            mouseDown = false;
+        })
+
 
         followMouseCanvas.addEventListener('mousedown', e => {
-            console.log(e.offsetX, e.offsetY)
-            followMouseCanvas.style = `background: radial-gradient(circle at ${e.offsetX}px ${e.offsetY}px, greenyellow 0%, rgba(79, 20, 204, 0) calc(0% + 150px)) no-repeat border-box border-box rgba(255, 255, 255, 0.1);`
+            mouseDown = true;
         })
 
         followMouseCanvas.addEventListener('mousemove', e => {
             console.log(e.offsetX, e.offsetY)
-            followMouseCanvas.style = `background: radial-gradient(circle at ${e.offsetX}px ${e.offsetY}px, rgb(79, 20, 204) 0%, rgba(79, 20, 204, 0) calc(0% + 150px)) no-repeat border-box border-box rgba(255, 255, 255, 0.1);`
+            followMouseCanvas.style = `background: radial-gradient(circle at ${e.offsetX}px ${e.offsetY}px, ${mouseDown ? colors.mouseDown : colors.mouseUp} 0%, rgba(79, 20, 204, 0) calc(0% + 150px)) no-repeat border-box border-box rgba(255, 255, 255, 0.1);`
         })
 
     </script>
