@@ -1,0 +1,34 @@
+<html>
+
+<body>
+
+    <p>
+        Fancy "follow mouse cursor" hover effect as seen on <a href="https://www.jetbrains.com/fleet/">the fleet
+            webpage</a>
+    </p>
+
+    <div style="background: black;">
+        <canvas id="follow_mouse_canvas" width="800" height="600"></canvas>
+
+    </div>
+
+
+    <script>
+
+        const follow_mouse_canvas = document.getElementById('follow_mouse_canvas');
+        const context = follow_mouse_canvas.getContext('2d');
+
+        follow_mouse_canvas.addEventListener('mousedown', e => {
+            console.log(e.offsetX, e.offsetY)
+            follow_mouse_canvas.style = `background: radial-gradient(circle at ${e.offsetX}px ${e.offsetY}px, greenyellow 0%, rgba(79, 20, 204, 0) calc(0% + 150px)) no-repeat border-box border-box rgba(255, 255, 255, 0.1);`
+        })
+
+        follow_mouse_canvas.addEventListener('mousemove', e => {
+            console.log(e.offsetX, e.offsetY)
+            follow_mouse_canvas.style = `background: radial-gradient(circle at ${e.offsetX}px ${e.offsetY}px, rgb(79, 20, 204) 0%, rgba(79, 20, 204, 0) calc(0% + 150px)) no-repeat border-box border-box rgba(255, 255, 255, 0.1);`
+        })
+
+    </script>
+</body>
+
+</html>
